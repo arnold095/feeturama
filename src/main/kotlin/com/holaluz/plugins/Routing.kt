@@ -1,7 +1,6 @@
 package com.holaluz.plugins
 
 import com.holaluz.application.UserFinder
-import com.holaluz.infrastructure.InMemoryUserRepository
 import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.application.*
@@ -21,7 +20,7 @@ fun Application.configureRouting() {
                 throw Exception("id is null")
             }
 
-            val user = userFinder.find(id, InMemoryUserRepository())
+            val user = userFinder.find(id)
 
             call.respondText("Hello ${user.name}")
         }

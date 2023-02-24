@@ -29,5 +29,5 @@ fun Application.dependencyInjection() {
 
 val sharedDependencies = module {
     single<UserRepository> { InMemoryUserRepository() }
-    single{ UserFinder() }
+    single{ UserFinder(get()) }
 }
