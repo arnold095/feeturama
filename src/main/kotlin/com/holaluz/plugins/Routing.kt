@@ -7,7 +7,7 @@ import io.ktor.server.application.*
 import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
-    val userFinder by inject<UserFinder>()
+    val useCase by inject<UserFinder>()
 
     routing {
         get("/") {
@@ -15,12 +15,7 @@ fun Application.configureRouting() {
         }
 
         get("/users/{id}") {
-            val id = call.parameters["id"]
-            if(id === null) {
-                throw Exception("id is null")
-            }
-
-            val user = userFinder.find(id)
+            val user = useCase.find(call.parameters["id"]!!)
 
             call.respondText("Hello ${user.name}")
         }

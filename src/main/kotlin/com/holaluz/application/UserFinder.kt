@@ -6,6 +6,6 @@ import com.holaluz.domain.UserRepository
 class UserFinder(private val repository: UserRepository) {
 
     fun find(id: String): User {
-        return User(id, "John Doe", "aaa")
+        return repository.find(id)?: throw Error("User not found");
     }
 }
